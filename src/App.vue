@@ -12,21 +12,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
-
+import { defineComponent, ref, reactive ,onMounted, toRefs} from 'vue'
+interface Data{
+  a:string,
+  b:number,
+  c:(index:number)=>void
+} //使用接口约束属性类型
 export default defineComponent({
   name: 'App',
   setup() {
     let { count, add } = addCount()
     let { arr, remove } = removeN()
     let { arr2,addList} = addN(arr)
+    const data:Data = reactive({  //接口类型注解
+      a:'',
+      b:10,
+      c:(index:number)=>{}
+    }) //使用reactive优化代码，将变量和函数都用reactive包裹
+    onMounted(()=>{
+      //......
+    })
+
     return {
       count,
       add,
       arr,
       remove,
       arr2,
-      addList
+      addList,
+      ...toRefs(data) //使用拓展运算符需要先将data变为可响应类型
     }
   },
 })
