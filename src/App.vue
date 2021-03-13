@@ -27,7 +27,7 @@ export default defineComponent({
     const data:Data = reactive({  //接口类型注解
       a:'',
       b:10,
-      c:(index:number)=>{}
+      c:(index:number)=>{data.b+1}
     }) //使用reactive优化代码，将变量和函数都用reactive包裹
     onMounted(()=>{
       //......
